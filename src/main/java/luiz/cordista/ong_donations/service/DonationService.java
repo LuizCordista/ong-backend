@@ -205,4 +205,35 @@ public class DonationService {
             return baos.toByteArray();
         }
     }
+
+    public long countItemDonations(Ong ong) {
+        return donationRepository.findByOng(ong).stream()
+                .filter(donation -> donation.getDonationType() == DonationType.ITEM)
+                .count();
+    }
+
+    public long countMonetaryDonations(Ong ong) {
+        return donationRepository.findByOng(ong).stream()
+                .filter(donation -> donation.getDonationType() == DonationType.MONETARY)
+                .count();
+    }
+
+    public double sumMonetaryDonations(Ong ong) {
+        return donationRepository.findByOng(ong).stream()
+                .filter(donation -> donation.getDonationType() == DonationType.MONETARY)
+                .mapToDouble(Donation::getAmount)
+                .sum();
+    }
+
+    public long countPendingDonations(Ong ong) {
+        return donationRepository.findByOng(ong).stream()
+                .filter(donation -> donation.getStatus() == Status.PENDING)
+                .count();
+    }
+
+    public long countCompletedDonations(Ong ong) {
+        return donationRepository.findByOng(ong).stream()
+                .filter(donation -> donation.getStatus() == Status.COMPLETED)
+                .count();
+    }
 }

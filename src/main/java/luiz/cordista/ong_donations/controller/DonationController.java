@@ -1,6 +1,7 @@
 package luiz.cordista.ong_donations.controller;
 
 import luiz.cordista.ong_donations.dto.DonationRequestDTO;
+import luiz.cordista.ong_donations.dto.DonationTotalDTO;
 import luiz.cordista.ong_donations.enums.DonationType;
 import luiz.cordista.ong_donations.enums.Status;
 import luiz.cordista.ong_donations.model.Donation;
@@ -106,6 +107,27 @@ public class DonationController {
         }
     }
 
+    @GetMapping("/total")
+    public ResponseEntity<?> getTotalDonations() {
+        try {
+            Optional<Ong> authenticatedCustomer = ongService.getAuthenticatedCustomer();
+            if (authenticatedCustomer.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+            }
+            long totalItems = donationService.countItemDonations(authenticatedCustomer.get());
+            long totalMonetary = donationService.countMonetaryDonations(authenticatedCustomer.get());
+            long pendingDonations = donationService.countPendingDonations(authenticatedCustomer.get());
+            long completedDonations = donationService.countCompletedDonations(authenticatedCustomer.get());
+            double totalSum = donationService.sumMonetaryDonations(authenticatedCustomer.get());
+
+
+            DonationTotalDTO totalDonations = new DonationTotalDTO(totalMonetary, totalItems,pendingDonations, completedDonations, totalSum);
+
+            return ResponseEntity.ok(totalDonations);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDonation(@PathVariable String id, @RequestBody DonationRequestDTO donationRequestDTO) {

@@ -52,4 +52,8 @@ public class OngDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public Ong getOng() {
+        return ong;
+    }
 }
