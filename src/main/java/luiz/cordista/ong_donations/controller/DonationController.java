@@ -83,7 +83,13 @@ public class DonationController {
             if (authenticatedCustomer.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
             }
-            List<Object> donations = donationService.getFilteredDonations(start_date, end_date, status, type, authenticatedCustomer.get());
+            List<Object> donations = donationService.getFilteredDonations(
+                    start_date,
+                    end_date,
+                    status,
+                    type,
+                    authenticatedCustomer.get()
+            );
             return ResponseEntity.ok(donations);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
@@ -121,7 +127,12 @@ public class DonationController {
             double totalSum = donationService.sumMonetaryDonations(authenticatedCustomer.get());
 
 
-            DonationTotalDTO totalDonations = new DonationTotalDTO(totalMonetary, totalItems,pendingDonations, completedDonations, totalSum);
+            DonationTotalDTO totalDonations = new DonationTotalDTO(
+                    totalMonetary,
+                    totalItems,
+                    pendingDonations,
+                    completedDonations,
+                    totalSum);
 
             return ResponseEntity.ok(totalDonations);
         } catch (Exception e) {

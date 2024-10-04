@@ -1,7 +1,6 @@
 package luiz.cordista.ong_donations.controller;
 
 import luiz.cordista.ong_donations.auth.JwtTokenUtil;
-import luiz.cordista.ong_donations.dto.DonationTotalDTO;
 import luiz.cordista.ong_donations.dto.LoginRequestDTO;
 import luiz.cordista.ong_donations.dto.LoginResponseDTO;
 import luiz.cordista.ong_donations.dto.RegisterRequestDTO;

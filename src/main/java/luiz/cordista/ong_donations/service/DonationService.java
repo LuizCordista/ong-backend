@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -51,11 +53,22 @@ public class DonationService {
 
         if (donationRequestDTO.donationType() == DonationType.MONETARY) {
             ong.setTotalDonations(ong.getTotalDonations() + donation.getAmount());
-            return new DonationMonetaryResponseDTO(donation.getId(), donation.getDonationType(),donation.getDonorName(), donation.getAmount(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationMonetaryResponseDTO(
+                    donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getAmount(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         }
 
         if (donationRequestDTO.donationType() == DonationType.ITEM) {
-            return new DonationItemResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getItemDescription(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationItemResponseDTO(donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getItemDescription(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         }
 
         return null;
@@ -65,9 +78,21 @@ public class DonationService {
         List<Donation> donations = donationRepository.findByOng(ong);
         return donations.stream().map(donation -> {
             if (donation.getDonationType() == DonationType.MONETARY) {
-                return new DonationMonetaryResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getAmount(), donation.getStatus(), donation.getCreatedDate());
+                return new DonationMonetaryResponseDTO(
+                        donation.getId(),
+                        donation.getDonationType(),
+                        donation.getDonorName(),
+                        donation.getAmount(),
+                        donation.getStatus(),
+                        donation.getCreatedDate());
             } else {
-                return new DonationItemResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getItemDescription(), donation.getStatus(), donation.getCreatedDate());
+                return new DonationItemResponseDTO(
+                        donation.getId(),
+                        donation.getDonationType(),
+                        donation.getDonorName(),
+                        donation.getItemDescription(),
+                        donation.getStatus(),
+                        donation.getCreatedDate());
             }
         }).collect(Collectors.toList());
     }
@@ -82,9 +107,21 @@ public class DonationService {
             return null;
         }
         if (donation.getDonationType() == DonationType.MONETARY) {
-            return new DonationMonetaryResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getAmount(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationMonetaryResponseDTO(
+                    donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getAmount(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         } else {
-            return new DonationItemResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getItemDescription(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationItemResponseDTO(
+                    donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getItemDescription(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         }
     }
 
@@ -127,10 +164,20 @@ public class DonationService {
 
         if (donationRequestDTO.donationType() == DonationType.MONETARY) {
             ong.setTotalDonations(ong.getTotalDonations() + donation.getAmount());
-            return new DonationMonetaryResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getAmount(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationMonetaryResponseDTO(donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getAmount(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         }
 
-        return new DonationItemResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getItemDescription(), donation.getStatus(), donation.getCreatedDate());
+        return new DonationItemResponseDTO(donation.getId(),
+                donation.getDonationType(),
+                donation.getDonorName(),
+                donation.getItemDescription(),
+                donation.getStatus(),
+                donation.getCreatedDate());
     }
 
     public Object editDonationStatus(String id, String status, Ong ong) {
@@ -146,9 +193,21 @@ public class DonationService {
         donation = donationRepository.save(donation);
 
         if (donation.getDonationType() == DonationType.MONETARY) {
-            return new DonationMonetaryResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getAmount(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationMonetaryResponseDTO(
+                    donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getAmount(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         } else {
-            return new DonationItemResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getItemDescription(), donation.getStatus(), donation.getCreatedDate());
+            return new DonationItemResponseDTO(
+                    donation.getId(),
+                    donation.getDonationType(),
+                    donation.getDonorName(),
+                    donation.getItemDescription(),
+                    donation.getStatus(),
+                    donation.getCreatedDate());
         }
     }
 
@@ -170,9 +229,21 @@ public class DonationService {
 
         return donationStream.map(donation -> {
             if (donation.getDonationType() == DonationType.MONETARY) {
-                return new DonationMonetaryResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getAmount(), donation.getStatus(), donation.getCreatedDate());
+                return new DonationMonetaryResponseDTO(
+                        donation.getId(),
+                        donation.getDonationType(),
+                        donation.getDonorName(),
+                        donation.getAmount(),
+                        donation.getStatus(),
+                        donation.getCreatedDate());
             } else {
-                return new DonationItemResponseDTO(donation.getId(), donation.getDonationType(), donation.getDonorName(), donation.getItemDescription(), donation.getStatus(), donation.getCreatedDate());
+                return new DonationItemResponseDTO(
+                        donation.getId(),
+                        donation.getDonationType(),
+                        donation.getDonorName(),
+                        donation.getItemDescription(),
+                        donation.getStatus(),
+                        donation.getCreatedDate());
             }
         }).collect(Collectors.toList());
     }
@@ -184,19 +255,21 @@ public class DonationService {
             Sheet sheet = workbook.createSheet("Donations");
 
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"ID", "Donor Name", "Donation Type", "Description", "Status", "Date"};
+            String[] headers = {"Doador", "Tipo", "Descrição", "Valor", "Status", "Data"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
             }
 
+            NumberFormat brlFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
             int rowNum = 1;
             for (Donation donation : donations) {
                 Row row = sheet.createRow(rowNum++);
-                row.createCell(0).setCellValue(donation.getId());
-                row.createCell(1).setCellValue(donation.getDonorName());
-                row.createCell(2).setCellValue(donation.getDonationType().toString());
-                row.createCell(3).setCellValue(donation.getItemDescription());
+                row.createCell(0).setCellValue(donation.getDonorName());
+                row.createCell(1).setCellValue(donation.getDonationType().toString());
+                row.createCell(2).setCellValue(donation.getItemDescription());
+                row.createCell(3).setCellValue(brlFormat.format(donation.getAmount()));
                 row.createCell(4).setCellValue(donation.getStatus().toString());
                 row.createCell(5).setCellValue(donation.getCreatedDate().toString());
             }

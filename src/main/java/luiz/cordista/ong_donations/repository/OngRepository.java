@@ -4,8 +4,6 @@ import luiz.cordista.ong_donations.model.Ong;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public interface OngRepository extends JpaRepository<Ong, String> {
     Ong findByEmail(String email);

@@ -3,7 +3,6 @@ package luiz.cordista.ong_donations.service;
 import luiz.cordista.ong_donations.dto.OngDataDTO;
 import luiz.cordista.ong_donations.dto.RegisterRequestDTO;
 import luiz.cordista.ong_donations.model.Ong;
-import luiz.cordista.ong_donations.model.OngDetails;
 import luiz.cordista.ong_donations.repository.OngRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
